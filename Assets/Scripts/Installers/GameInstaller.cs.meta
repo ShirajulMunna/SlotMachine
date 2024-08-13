@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6b8836451a58a344788dff8e5773afc7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _audioServiceInstance: {instanceID: 0}
+  - _triggerServiceInstance: {instanceID: 0}
+  - _rollerPrefab: {instanceID: 0}
+  - _rollerItemPrefab: {instanceID: 0}
+  - slider1text: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
