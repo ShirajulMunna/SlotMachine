@@ -3,9 +3,11 @@ using JGM.Game.Events;
 using JGM.Game.Patterns;
 using JGM.Game.Rewards;
 using JGM.Game.Rollers;
+using ModestTree;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -58,7 +60,8 @@ public class GameManager : MonoBehaviour
     public int giftItemCount;
     public GameObject[] sliderImages;
     public TextMeshProUGUI totalThreshold;
-    public bool isActivateOnce;
+    public bool isActivateOnce,isLocked;
+    
 
 
     private void Awake()
@@ -72,9 +75,13 @@ public class GameManager : MonoBehaviour
         giftItemCount = PlayerPrefs.GetInt("gift",3);
         moveSpeed = rotationSpeed_1;
         AudioSource = GetComponent<AudioSource>();
-
         
-   
+        foreach (Slider slider in sliders)
+        {
+            slider.onValueChanged.AddListener(delegate { OnSliderValueChanged(slider); });
+            
+        }
+
     }
 
     private void Update()
@@ -85,11 +92,294 @@ public class GameManager : MonoBehaviour
         }
     }
 
-   
+    private void OnSliderValueChanged(Slider changedSlider)
+    {
+        
+        int sliderIndex = sliders.IndexOf(changedSlider);
+
+        switch (sliderIndex) 
+        {
+            case 0:
+                Debug.Log("slider" + sliderIndex + " " + "value is " + changedSlider.value);
+                if (changedSlider.value > 3 && changedSlider.value < 97)
+                {
+                    text_percentageSlider1.SetActive(true);
+                }
+                else
+                {
+                    text_percentageSlider1.SetActive(false);
+                }
+
+                if (giftItemCount == 3)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_3.0", changedSlider.value);
+                    Debug.Log("sliderValue_0.0");
+
+                }
+                else if (giftItemCount == 4)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_4.0", changedSlider.value);
+                    Debug.Log("sliderValue_0.1");
+
+
+                }
+                else if (giftItemCount == 5)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_5.0", changedSlider.value);
+                    Debug.Log("sliderValue_0.2");
+
+
+                }
+
+            
+                parcentageBoxs[0].text = changedSlider.value.ToString();
+
+         
+
+                setSlider(0);
+                break;
+            case 1:
+                Debug.Log("slider" + sliderIndex + " " + "value is " + changedSlider.value);
+                if (changedSlider.value > 3 && changedSlider.value < 97)
+                {
+                    text_percentageSlider1.SetActive(true);
+                }
+                else
+                {
+                    text_percentageSlider1.SetActive(false);
+                }
+                if (giftItemCount == 3)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_3.1", changedSlider.value);
+                    Debug.Log("sliderValue_1.0");
+
+                }
+                else if (giftItemCount == 4)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_4.1", changedSlider.value);
+                    Debug.Log("sliderValue_1.1");
+
+
+                }
+                else if (giftItemCount == 5)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_5.1", changedSlider.value);
+                    Debug.Log("sliderValue_1.2");
+
+
+                }
+
+              
+                parcentageBoxs[1].text = changedSlider. value.ToString();
+         
+
+
+                setSlider(0);
+                break;
+            case 2:
+                Debug.Log("slider" + sliderIndex + " " + "value is " + changedSlider.value);
+                if (changedSlider.value > 3 && changedSlider.value < 97)
+                {
+                    text_percentageSlider2.SetActive(true);
+                }
+                else
+                {
+                    text_percentageSlider2.SetActive(false);
+                }
+                if (giftItemCount == 3)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_3.2", changedSlider.value);
+                    Debug.Log("sliderValue_0.0");
+
+                }
+                else if (giftItemCount == 4)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_4.2", changedSlider.value);
+                    Debug.Log("sliderValue_0.1");
+
+
+                }
+                else if (giftItemCount == 5)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_5.2", changedSlider.value);
+                    Debug.Log("sliderValue_0.2");
+
+
+                }
+
+          
+                parcentageBoxs[2].text = changedSlider.value.ToString();
+       
+
+                break;
+            case 3:
+                Debug.Log("slider" + sliderIndex + " " + "value is " + changedSlider.value);
+                if (changedSlider.value > 3 && changedSlider.value < 97)
+                {
+                    text_percentageSlider3.SetActive(true);
+                }
+                else
+                {
+                    text_percentageSlider3.SetActive(false);
+                }
+                if (giftItemCount == 3)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_3.3", changedSlider.value);
+                    Debug.Log("sliderValue_0.0");
+
+                }
+                else if (giftItemCount == 4)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_4.3", changedSlider.value);
+                    Debug.Log("sliderValue_0.1");
+
+
+                }
+                else if (giftItemCount == 5)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_5.3", changedSlider.value);
+                    Debug.Log("sliderValue_0.2");
+
+
+                }
+
+        
+                parcentageBoxs[3].text = changedSlider.value.ToString();
+          
+                break;
+            case 4:
+                Debug.Log("slider" + sliderIndex + " " + "value is " + changedSlider.value);
+                if (changedSlider.value > 3 && changedSlider.value < 97)
+                {
+                    text_percentageSlider4.SetActive(true);
+                }
+                else
+                {
+                    text_percentageSlider4.SetActive(false);
+                }
+                if (giftItemCount == 3)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_3.4", changedSlider.value);
+                    Debug.Log("sliderValue_0.0");
+
+                }
+                else if (giftItemCount == 4)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_4.4", changedSlider.value);
+                    Debug.Log("sliderValue_0.1");
+
+
+                }
+                else if (giftItemCount == 5)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_5.4", changedSlider.value);
+                    Debug.Log("sliderValue_0.2");
+
+
+                }
+
+             
+                parcentageBoxs[4].text = changedSlider.value.ToString();
+            
+                break;
+            case 5:
+                Debug.Log("slider" + sliderIndex + " " + "value is " + changedSlider.value);
+                if (changedSlider.value > 3 && changedSlider.value < 97)
+                {
+                    text_percentageSlider5.SetActive(true);
+                }
+                else
+                {
+                    text_percentageSlider5.SetActive(false);
+                }
+                if (giftItemCount == 3)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_3.5", changedSlider.value);
+                    Debug.Log("sliderValue_0.0");
+
+                }
+                else if (giftItemCount == 4)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_4.5", changedSlider.value);
+                    Debug.Log("sliderValue_0.1");
+
+
+                }
+                else if (giftItemCount == 5)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_5.5", changedSlider.value);
+                    Debug.Log("sliderValue_0.2");
+
+
+                }
+
+              ;
+                parcentageBoxs[5].text = changedSlider.value.ToString();
+               
+                break;
+            case 6:
+                if (changedSlider.value > 3 && changedSlider.value < 97)
+                {
+                    text_percentageSlider6.SetActive(true);
+                }
+                else
+                {
+                    text_percentageSlider6.SetActive(false);
+                }
+                if (giftItemCount == 3)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_3.6", changedSlider.value);
+                    Debug.Log("sliderValue_0.0");
+
+                }
+                else if (giftItemCount == 4)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_4.6", changedSlider.value);
+                    Debug.Log("sliderValue_0.1");
+
+
+                }
+                else if (giftItemCount == 5)
+                {
+
+                    PlayerPrefs.SetFloat("sliderValue_5.6", changedSlider.value);
+                    Debug.Log("sliderValue_0.2");
+
+
+                }
+
+               
+                parcentageBoxs[6].text = changedSlider.value.ToString();
+                break;
+
+
+        }
 
 
 
 
+
+    }
     #region 
     public void LooseparcentagesBox()
     {
@@ -141,7 +431,7 @@ public class GameManager : MonoBehaviour
     }
     public void parcentagesBox_1()
     {
-        //Debug.Log("box number" + whichBox);
+        
         string inputText = parcentageBoxs[2].text;
 
 
@@ -162,7 +452,7 @@ public class GameManager : MonoBehaviour
     }
     public void parcentagesBox_2()
     {
-        //Debug.Log("box number" + whichBox);
+        
         string inputText = parcentageBoxs[3].text;
 
 
@@ -236,26 +526,27 @@ public class GameManager : MonoBehaviour
 
             if (sum == 100)
             {
-              
+
                 parcentagesOverFlow.SetActive(false);
 
 
             }
-            else if (sum > 100 && !isActivateOnce) 
+            else if (sum > 100 && !isActivateOnce )
             {
 
-                parcentagesOverFlow.SetActive(true);
                 isActivateOnce = true;
-                
-              
-             
-            }
-            else
-            {
-               // gameButton.SetActive(false);
-              // parcentagesOverFlow.SetActive(false);
+                StartCoroutine(LockSlidersAtCurrentValue());
+
 
             }
+            else if (sum < 100) 
+            {
+               // UnlockSlidersAtCurrentValue();
+
+
+
+            }
+           
 
 
         }
@@ -264,302 +555,45 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void ActivateSliderInteraction() 
-    {
-    
-    }
+
     #endregion
 
 
     #region 
-    public void percentageUpdateHandler0(float value)
+
+    public IEnumerator LockSlidersAtCurrentValue() 
     {
-        if (value > 3 && value < 97)
+
+        yield return new WaitForSeconds(0.1f);
+        for (int i = 0; i < sliders.Length; i++)
         {
-            text_percentageSlider1.SetActive(true);
-        }
-        else
-        {
-            text_percentageSlider1.SetActive(false);
-        }      
+           // sliders[i].maxValue= sliders[i].value;
 
-        if (giftItemCount == 3)
-        {
-           
-            PlayerPrefs.SetFloat("sliderValue_3.0", value);
-            Debug.Log("sliderValue_0.0");
-
-        }
-        else if (giftItemCount == 4)
-        {
-           
-            PlayerPrefs.SetFloat("sliderValue_4.0", value);
-            Debug.Log("sliderValue_0.1");
-
-
-        }
-        else if (giftItemCount == 5)
-        {
-           
-            PlayerPrefs.SetFloat("sliderValue_5.0", value);
-            Debug.Log("sliderValue_0.2");
-
-
+            sliders[i].GetComponent<Slider>().interactable=false;
         }
 
-       // text_percentageSlider1.GetComponent<TextMeshProUGUI>().text = (int)(value + 0.5f) + "%";
-        parcentageBoxs[0].text = value.ToString();
-       
-       // PlayerPrefs.SetFloat("NoMatch", value);
+        yield return new WaitForSeconds(3.5f);
+        parcentagesOverFlow.SetActive(true);
 
-        setSlider(0);
+        StartCoroutine(UnlockSlidersAtCurrentValue());
 
     }
-    public void percentageUpdateHandler1(float value)
+    public IEnumerator UnlockSlidersAtCurrentValue()
     {
-        if (value > 3 && value < 97)
-        {
-            text_percentageSlider1.SetActive(true);
-        }
-        else
-        {
-            text_percentageSlider1.SetActive(false);
-        }
-        if (giftItemCount == 3)
+        yield return new WaitForSeconds(0.1f);
+
+        for (int i = 0; i < sliders.Length; i++)
         {
 
-            PlayerPrefs.SetFloat("sliderValue_3.1", value);
-            Debug.Log("sliderValue_1.0");
-
+            sliders[i].GetComponent<Slider>().interactable = true;
         }
-        else if (giftItemCount == 4)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_4.1", value);
-            Debug.Log("sliderValue_1.1");
-
-
-        }
-        else if (giftItemCount == 5)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_5.1", value);
-            Debug.Log("sliderValue_1.2");
-
-
-        }
-
-       // text_percentageSlider1.GetComponent<TextMeshProUGUI>().text = (int)(value + 0.5f) + "%";
-        parcentageBoxs[1].text = value .ToString();
-      //  PlayerPrefs.SetFloat("Watch", value);
-
-
-        setSlider(0);
-
-    }
-    public void percentageUpdateHandler2(float value)
-    {
-        if (value > 3 && value < 97)
-        {
-            text_percentageSlider2.SetActive(true);
-        }
-        else
-        {
-            text_percentageSlider2.SetActive(false);
-        }
-        if (giftItemCount == 3)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_3.2", value);
-            Debug.Log("sliderValue_0.0");
-
-        }
-        else if (giftItemCount == 4)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_4.2", value);
-            Debug.Log("sliderValue_0.1");
-
-
-        }
-        else if (giftItemCount == 5)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_5.2", value);
-            Debug.Log("sliderValue_0.2");
-
-
-        }
-
-       // text_percentageSlider2.GetComponent<TextMeshProUGUI>().text = (int)(value + 0.5f) + "%";
-        parcentageBoxs[2].text = value.ToString();
-       // PlayerPrefs.SetFloat("Camera", value);
-
 
 
     }
 
-    public void percentageUpdateHandler3(float value)
-    {
-        if (value > 3 && value < 97)
-        {
-            text_percentageSlider3.SetActive(true);
-        }
-        else
-        {
-            text_percentageSlider3.SetActive(false);
-        }
-        if (giftItemCount == 3)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_3.3", value);
-            Debug.Log("sliderValue_0.0");
-
-        }
-        else if (giftItemCount == 4)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_4.3", value);
-            Debug.Log("sliderValue_0.1");
 
 
-        }
-        else if (giftItemCount == 5)
-        {
 
-            PlayerPrefs.SetFloat("sliderValue_5.3", value);
-            Debug.Log("sliderValue_0.2");
-
-
-        }
-
-       // text_percentageSlider3.GetComponent<TextMeshProUGUI>().text = (int)(value + 0.5f) + "%";
-        parcentageBoxs[3].text = value.ToString();
-       // PlayerPrefs.SetFloat("Laptop", value);
-
-
-    }
-
-    public void percentageUpdateHandler4(float value)
-    {
-        if (value > 3 && value < 97)
-        {
-            text_percentageSlider4.SetActive(true);
-        }
-        else
-        {
-            text_percentageSlider4.SetActive(false);
-        }
-        if (giftItemCount == 3)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_3.4", value);
-            Debug.Log("sliderValue_0.0");
-
-        }
-        else if (giftItemCount == 4)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_4.4", value);
-            Debug.Log("sliderValue_0.1");
-
-
-        }
-        else if (giftItemCount == 5)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_5.4", value);
-            Debug.Log("sliderValue_0.2");
-
-
-        }
-
-       // text_percentageSlider4.GetComponent<TextMeshProUGUI>().text = (int)(value + 0.5f) + "%";
-        parcentageBoxs[4].text = value.ToString();
-      //  PlayerPrefs.SetFloat("Bag", value);
-
-
-    }
-
-    public void percentageUpdateHandler5(float value)
-    {
-        if (value > 3 && value < 97)
-        {
-            text_percentageSlider5.SetActive(true);
-        }
-        else
-        {
-            text_percentageSlider5.SetActive(false);
-        }
-        if (giftItemCount == 3)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_3.5", value);
-            Debug.Log("sliderValue_0.0");
-
-        }
-        else if (giftItemCount == 4)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_4.5", value);
-            Debug.Log("sliderValue_0.1");
-
-
-        }
-        else if (giftItemCount == 5)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_5.5", value);
-            Debug.Log("sliderValue_0.2");
-
-
-        }
-
-       // text_percentageSlider5.GetComponent<TextMeshProUGUI>().text = (int)(value + 0.5f) + "%";
-        parcentageBoxs[5].text = value.ToString();
-       // PlayerPrefs.SetFloat("Mobile", value);
-
-
-    }
-
-    public void percentageUpdateHandler6(float value)
-    {
-        if (value > 3 && value < 97)
-        {
-            text_percentageSlider6.SetActive(true);
-        }
-        else
-        {
-            text_percentageSlider6.SetActive(false);
-        }
-        if (giftItemCount == 3)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_3.6", value);
-            Debug.Log("sliderValue_0.0");
-
-        }
-        else if (giftItemCount == 4)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_4.6", value);
-            Debug.Log("sliderValue_0.1");
-
-
-        }
-        else if (giftItemCount == 5)
-        {
-
-            PlayerPrefs.SetFloat("sliderValue_5.6", value);
-            Debug.Log("sliderValue_0.2");
-
-
-        }
-
-       // text_percentageSlider6.GetComponent<TextMeshProUGUI>().text = (int)(value + 0.5f) + "%";
-        parcentageBoxs[6].text = value.ToString();
-       
-    }
 
     #endregion
 
@@ -650,7 +684,7 @@ public class GameManager : MonoBehaviour
    
         if(value == 1)
         {
-            
+            isActivateOnce = false;
             PlayerPrefs.SetInt("gift", 3);
             giftItemCount = 3;
 
@@ -673,6 +707,8 @@ public class GameManager : MonoBehaviour
         }
         else if(value == 2)
         {
+            isActivateOnce = false;
+
             PlayerPrefs.SetInt("gift", 4);
             giftItemCount = 4;
 
@@ -692,6 +728,8 @@ public class GameManager : MonoBehaviour
         }
         else if ( value == 3)
         {
+            isActivateOnce = false;
+
             PlayerPrefs.SetInt("gift", 5);
             giftItemCount = 5;
 
