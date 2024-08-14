@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
     public int sum = 0;
     public int giftItemCount;
     public GameObject[] sliderImages;
+    public TextMeshProUGUI totalThreshold;
+    public bool isActivateOnce;
 
 
     private void Awake()
@@ -230,18 +232,22 @@ public class GameManager : MonoBehaviour
         {
            
             sum += percentValues[i];
+            totalThreshold.text=sum.ToString();
 
             if (sum == 100)
             {
-              //  gameButton.SetActive(true);
+              
                 parcentagesOverFlow.SetActive(false);
 
 
             }
-            else if (sum > 100) 
+            else if (sum > 100 && !isActivateOnce) 
             {
+
                 parcentagesOverFlow.SetActive(true);
-              //  gameButton.SetActive(false);
+                isActivateOnce = true;
+                
+              
              
             }
             else
