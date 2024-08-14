@@ -527,15 +527,17 @@ public class GameManager : MonoBehaviour
             if (sum == 100)
             {
 
-                parcentagesOverFlow.SetActive(false);
+                isActivateOnce = true;
+                StartCoroutine(LockSlidersAtCurrentValue());
+
 
 
             }
             else if (sum > 100 && !isActivateOnce )
             {
 
-                isActivateOnce = true;
-                StartCoroutine(LockSlidersAtCurrentValue());
+               /* isActivateOnce = true;
+                StartCoroutine(LockSlidersAtCurrentValue());*/
 
 
             }
@@ -563,17 +565,17 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator LockSlidersAtCurrentValue() 
     {
+        parcentagesOverFlow.SetActive(true);
 
         yield return new WaitForSeconds(0.1f);
         for (int i = 0; i < sliders.Length; i++)
         {
-           // sliders[i].maxValue= sliders[i].value;
+           
 
             sliders[i].GetComponent<Slider>().interactable=false;
         }
 
         yield return new WaitForSeconds(3.5f);
-        parcentagesOverFlow.SetActive(true);
 
         StartCoroutine(UnlockSlidersAtCurrentValue());
 
