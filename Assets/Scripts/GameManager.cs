@@ -789,6 +789,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void resetHandler(){
+        isActivateOnce = false;
         for(int i=0;i<6;i++){
             Debug.Log("before reset  "+ sliders[i].value);
             sliderValue[i] = 0;
