@@ -6526,7 +6526,7 @@ GameObject:
   - component: {fileID: 1695586739}
   - component: {fileID: 1695586738}
   m_Layer: 5
-  m_Name: Back
+  m_Name: Back Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11359,7 +11359,7 @@ GameObject:
   - component: {fileID: 5496253574320852934}
   - component: {fileID: 6859987900197517722}
   m_Layer: 5
-  m_Name: Parcent
+  m_Name: Parcent Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21251,7 +21251,7 @@ GameObject:
   - component: {fileID: 3160513267002632315}
   - component: {fileID: 3310100598493828012}
   m_Layer: 5
-  m_Name: Save
+  m_Name: Save Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
