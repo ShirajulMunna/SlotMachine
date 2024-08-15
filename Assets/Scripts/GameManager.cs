@@ -61,7 +61,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] sliderImages;
     public TextMeshProUGUI totalThreshold;
     public bool isActivateOnce,isLocked;
-    
+    private float[] previousValues;
+
 
 
     private void Awake()
@@ -75,9 +76,11 @@ public class GameManager : MonoBehaviour
         giftItemCount = PlayerPrefs.GetInt("gift",3);
         moveSpeed = rotationSpeed_1;
         AudioSource = GetComponent<AudioSource>();
-        
+        previousValues = new float[sliders.Length];
+
         foreach (Slider slider in sliders)
         {
+            
             slider.onValueChanged.AddListener(delegate { OnSliderValueChanged(slider); });
             
         }
@@ -94,7 +97,39 @@ public class GameManager : MonoBehaviour
 
     private void OnSliderValueChanged(Slider changedSlider)
     {
-        
+        float totalValue = 0;
+
+        for (int i = 0; i < sliders.Length; i++)
+        {
+            totalValue += sliders[i].value;
+
+        }
+        totalThreshold.text = totalValue.ToString();
+
+
+        if (totalValue > 100)
+        {
+            float excess = totalValue - 100;
+            for (int i = sliders.Length - 1; i >= 0; i--)
+            {
+                float difference = sliders[i].value - previousValues[i];
+                if (difference > 0)
+                {
+                    float adjustment = Mathf.Min(difference, excess);
+                    sliders[i].value -= adjustment;
+                    excess -= adjustment;
+                    if (excess <= 0) break;
+                }
+            }
+        }
+
+        for (int i = 0; i < sliders.Length; i++)
+        {
+            previousValues[i] = sliders[i].value;
+        }
+
+        UpdatePercentageTexts();
+
         int sliderIndex = sliders.IndexOf(changedSlider);
 
         switch (sliderIndex) 
@@ -380,6 +415,19 @@ public class GameManager : MonoBehaviour
 
 
     }
+    private void UpdatePercentageTexts()
+    {
+
+        for (int i = 0; i < sliders.Length; i++)
+        {
+            // Assuming you have TextMeshProUGUI components for percentage display
+            if (i < parcentageBoxs.Length)
+            {
+                parcentageBoxs[i].text = sliders[i].value.ToString();
+            }
+        }
+
+    }
     #region 
     public void LooseparcentagesBox()
     {
@@ -394,7 +442,7 @@ public class GameManager : MonoBehaviour
            
             percentValues[0] = selectedParcentages;
             sliderValue[0] = selectedParcentages;
-            CalculateParcentThreshHold();
+          //  CalculateParcentThreshHold();
 
            
 
@@ -419,7 +467,7 @@ public class GameManager : MonoBehaviour
             sliders[1].value =selectedParcentages;
             percentValues[1]= selectedParcentages;
             sliderValue[1] = selectedParcentages;
-            CalculateParcentThreshHold();
+          //  CalculateParcentThreshHold();
 
 
         }
@@ -441,7 +489,7 @@ public class GameManager : MonoBehaviour
             sliders[2].value = selectedParcentages;
             percentValues[2] = selectedParcentages;
             sliderValue[2] = selectedParcentages;
-            CalculateParcentThreshHold();
+           // CalculateParcentThreshHold();
 
         }
         else
@@ -462,7 +510,7 @@ public class GameManager : MonoBehaviour
             sliders[3].value = selectedParcentages;
             percentValues[3] = selectedParcentages;
             sliderValue[3] = selectedParcentages;
-            CalculateParcentThreshHold();
+           // CalculateParcentThreshHold();
         }
         else
         {
@@ -482,7 +530,7 @@ public class GameManager : MonoBehaviour
             sliders[4].value = selectedParcentages;
             percentValues[4] = selectedParcentages;
             sliderValue[4] = selectedParcentages;
-            CalculateParcentThreshHold();
+           // CalculateParcentThreshHold();
         }
         else
         {
@@ -502,7 +550,7 @@ public class GameManager : MonoBehaviour
             sliders[5].value = selectedParcentages;
             percentValues[5] = selectedParcentages;
             sliderValue[5] = selectedParcentages;
-            CalculateParcentThreshHold();
+           // CalculateParcentThreshHold();
         }
         else
         {
@@ -527,8 +575,8 @@ public class GameManager : MonoBehaviour
             if (sum == 100)
             {
 
-                isActivateOnce = true;
-                StartCoroutine(LockSlidersAtCurrentValue());
+                /*isActivateOnce = true;
+                StartCoroutine(LockSlidersAtCurrentValue());*/
 
 
 
