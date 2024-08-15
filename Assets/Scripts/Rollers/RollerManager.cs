@@ -20,7 +20,7 @@ namespace JGM.Game.Rollers
         [Inject] private RollerSequencesLibrary _rollerSequencesLibrary;
         [Inject] public SpriteLibrary _spriteAssets;
 
-        public Button settingButton;
+      //  public Button settingButton;
 
         public Roller[] _rollers;
         private IGrid _gridOfStoppedRollerItemsOnScreen;
@@ -104,7 +104,7 @@ namespace JGM.Game.Rollers
            
 
 
-            settingButton.enabled = false;
+           // settingButton.enabled = false;
            // _audioService.Play("Spin Roller", true);
             for (int i = 0; i < _rollers.Length; ++i)
             {
@@ -132,7 +132,7 @@ namespace JGM.Game.Rollers
             yield return new WaitForSeconds(2f);
            
             _eventTriggerService.Trigger("Check Spin Result", new SpinResultData(_gridOfStoppedRollerItemsOnScreen));
-            settingButton.enabled = true;
+           // settingButton.enabled = true;
             
 
         }
